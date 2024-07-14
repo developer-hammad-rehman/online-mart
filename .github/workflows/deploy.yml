@@ -73,7 +73,7 @@ jobs:
             --env-vars 'APP_SETTING=my-setting'
 
           az containerapp create \
-            --name product-service \
+            --name notification-service \
             --resource-group azure-env \
             --environment azure-env \
             --image ${{ secrets.DOCKER_HUB_USERNAME }}/notification-service:latest \
