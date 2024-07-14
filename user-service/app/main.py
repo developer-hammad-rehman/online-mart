@@ -10,7 +10,16 @@ async def lifespan(app: FastAPI):
     # await event_up()
     yield
 
-app = FastAPI(lifespan=lifespan)
+app = FastAPI(
+title="User Service",
+lifespan=lifespan,
+servers=[
+    {
+        "url": "https://user-service.bluedune-2d8c02d1.eastus.azurecontainerapps.io",
+        "description": "Production Url",
+    }
+]
+)
 
 @app.get("/")
 def read_root():
