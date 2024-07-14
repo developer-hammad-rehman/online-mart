@@ -37,7 +37,7 @@ jobs:
             --name user-service \
             --resource-group azure-env \
             --environment azure-env \
-            --image ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:latest \
+            --image ${{ secrets.DOCKER_HUB_USERNAME }}/user-service:latest \
             --target-port 8000 \
             --ingress 'external' \
             --env-vars 'APP_SETTING=my-setting'
