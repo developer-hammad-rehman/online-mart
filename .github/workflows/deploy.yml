@@ -51,6 +51,6 @@ jobs:
             --resource-group azure-env \
             --environment azure-env \
             --image ${{ secrets.DOCKER_HUB_USERNAME }}/order-service:latest \
-            --target-port 8081 \
+            --target-port 8084 \
             --ingress 'external' \
             --env-vars 'APP_SETTING=my-setting'
