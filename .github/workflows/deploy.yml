@@ -26,6 +26,10 @@ jobs:
           
           docker push ${{ secrets.DOCKER_HUB_USERNAME }}/user-service:latest
 
+          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/order-service:latest ./order-service
+          
+          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/order-service:latest
+
       - name: Azure Login
         uses: azure/login@v1
         with:
@@ -38,6 +42,15 @@ jobs:
             --resource-group azure-env \
             --environment azure-env \
             --image ${{ secrets.DOCKER_HUB_USERNAME }}/user-service:latest \
+            --target-port 8081 \
+            --ingress 'external' \
+            --env-vars 'APP_SETTING=my-setting'
+
+          az containerapp create \
+            --name order-service \
+            --resource-group azure-env \
+            --environment azure-env \
+            --image ${{ secrets.DOCKER_HUB_USERNAME }}/order-service:latest \
             --target-port 8081 \
             --ingress 'external' \
             --env-vars 'APP_SETTING=my-setting'
