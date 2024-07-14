@@ -16,18 +16,18 @@ def get_item_route(session:DBSESSION):
     return item
 
 
-@user_router.get("/get-avaliable-stock")
+@user_router.get("/get-avaliable-items")
 def get_avaliable_stock_route(session:DBSESSION):
     avaliable_stock = get_avaliable_stock(session)
     return avaliable_stock
 
 
-@user_router.get("/get-hot-item")
+@user_router.get("/get-hot-items")
 def get_hot_item_route(session:DBSESSION):
     hot_item = get_hot_item(session)
     return hot_item
 
-@user_router.get("/get-sell-item")
+@user_router.get("/get-sell-items")
 def get_sell_item_route(session:DBSESSION):
     sell_item = get_sell_item(session)
     return sell_item

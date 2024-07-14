@@ -1,18 +1,29 @@
+import ssl
 from aiokafka import AIOKafkaConsumer
 import asyncio
 import logging
-from app.setting import KAFKA_BOOTSTRAP_SERVERS , KAFKA_GROUP_ID , KAFKA_TOPIC
+from app.setting import KAFKA_BOOTSTRAP_SERVERS , KAFKA_GROUP_ID , KAFKA_TOPIC , KAFKA_CONNECTION_STRING
 import json
 from app.core.notification import send_notification
 
 logging.basicConfig(level=logging.INFO)
 
+
+context = ssl.create_default_context()
+context.check_hostname = False
+context.verify_mode = ssl.CERT_REQUIRED
+
 async def notification_consumer():
     consumer = AIOKafkaConsumer(
-        "notification",
-        bootstrap_servers="broker:19092",  # type: ignore
-        group_id="notification_group",
+        KAFKA_TOPIC,
+        bootstrap_servers=KAFKA_BOOTSTRAP_SERVERS,
+        group_id=KAFKA_GROUP_ID,
         auto_offset_reset="earliest",
+        security_protocol="SASL_SSL",
+        sasl_mechanism="PLAIN",
+        sasl_plain_username="$ConnectionString",
+        sasl_plain_password=KAFKA_CONNECTION_STRING,
+        ssl_context=context,
     )
     await consumer.start()
     try:

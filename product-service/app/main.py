@@ -15,8 +15,8 @@ app = FastAPI(
     lifespan=lifespan,
     servers=[
         {
-            "url": "https://maggot-still-reliably.ngrok-free.app",
-            "description": "Ngrok server for testing",
+            "url": "https://product-service.bluedune-2d8c02d1.eastus.azurecontainerapps.iop",
+            "description": "Production Url",
         }
     ],
 )

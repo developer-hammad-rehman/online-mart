@@ -34,6 +34,10 @@ jobs:
           
           docker push ${{ secrets.DOCKER_HUB_USERNAME }}/product-service:latest
 
+          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/notification-service:latest ./notification-services
+          
+          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/notification-service:latest
+
       - name: Azure Login
         uses: azure/login@v1
         with:
@@ -65,5 +69,14 @@ jobs:
             --environment azure-env \
             --image ${{ secrets.DOCKER_HUB_USERNAME }}/product-service:latest \
             --target-port 8083 \
+            --ingress 'external' \
+            --env-vars 'APP_SETTING=my-setting'
+
+          az containerapp create \
+            --name product-service \
+            --resource-group azure-env \
+            --environment azure-env \
+            --image ${{ secrets.DOCKER_HUB_USERNAME }}/notification-service:latest \
+            --target-port 8086 \
             --ingress 'external' \
             --env-vars 'APP_SETTING=my-setting'
