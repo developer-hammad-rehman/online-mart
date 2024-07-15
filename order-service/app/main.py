@@ -32,7 +32,7 @@ async def root_route():
 
 
 @app.get('/login' , tags=['Login'])
-async def login(redirect_uri:str , state:str , client_id:str , response_type:str  , scope:str):
+async def login(redirect_uri:str , state:str , client_id:str , response_type:str):
     qurey = f"?redirect_uri={redirect_uri}&state={state}&client_id={client_id}&response_type={response_type}&scope={scope}"
     return RedirectResponse(url=f"https://martnest.vercel.app/login{qurey}")
 
