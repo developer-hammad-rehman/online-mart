@@ -16,10 +16,10 @@ app = FastAPI(
     title="Order Service", 
     lifespan=lifespan, 
      servers=[
-        {
-            "url": "https://order-service.bluedune-2d8c02d1.eastus.azurecontainerapps.io",
-            "description": "Production Url",
-        }
+        # {
+        #     "url": "https://order-service.bluedune-2d8c02d1.eastus.azurecontainerapps.io",
+        #     "description": "Production Url",
+        # }
     ],
 )
 

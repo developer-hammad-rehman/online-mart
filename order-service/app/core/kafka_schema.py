@@ -8,11 +8,18 @@ from app.settings import KAFKA_GROUP_ID, KAFKA_PORT, KAFKA_TOPIC , KAFKA_CONNECT
 
 logging.basicConfig(level=logging.INFO)
 
+context = ssl.create_default_context()
+context.check_hostname = False
+context.verify_mode = ssl.CERT_REQUIRED
 
 async def get_producer():
     producer = AIOKafkaProducer(
         bootstrap_servers=KAFKA_PORT,  # type: ignore
-        
+        security_protocol="SASL_SSL",
+        sasl_mechanism="PLAIN",
+        sasl_plain_username="$ConnectionString",
+        sasl_plain_password=KAFKA_CONNECTION_STRING,
+        ssl_context=context,
     )
     await producer.start()
     try:
@@ -21,9 +28,6 @@ async def get_producer():
         await producer.stop()
 
 
-context = ssl.create_default_context()
-context.check_hostname = False
-context.verify_mode = ssl.CERT_REQUIRED
 
 async def order_consumer():
     consumer = AIOKafkaConsumer(
@@ -42,7 +46,7 @@ async def order_consumer():
         async for msg in consumer:
             decode_json = json.loads(bytes(msg.value).decode("utf-8"))  # type: ignore
             logging.info(f"Consumed message: {decode_json}")
-            # kafka_order_status(decode_json)
+            kafka_order_status(decode_json)
     except Exception as e:
         logging.error(f"Kafka Error: {str(e)}")
     finally:

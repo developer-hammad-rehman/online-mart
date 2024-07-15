@@ -10,6 +10,7 @@ user_router = APIRouter(tags=["User Routes"])
 
 @user_router.post("/place-order")
 async def get_user_route(order: Order, session: DBSESSION, producer: PRODUCERDEP):
+    
     await producer.send_and_wait(
         KAFKA_NOTIFICATION_TOPIC,
         json.dumps({"type": "order_placed", "email": order.username}).encode("utf-8"),
