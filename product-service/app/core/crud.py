@@ -1,4 +1,6 @@
+from fastapi import Depends
 from sqlmodel import Session, select
+from app.db import get_session
 from app.models import Category , AvaliableStock , HotItem ,SellItem  , Item
 
 
@@ -49,7 +51,7 @@ def create_category(session:Session,category:Category):
     return category
   return {"message":"Category already exists"}
 
-def create_item(session:Session, item:Item):
+def create_item(item:Item  , session : Session ):
     session.add(item)
     session.commit()
     session.refresh(item)

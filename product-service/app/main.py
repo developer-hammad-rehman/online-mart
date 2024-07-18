@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from app.core.kafka_schema import event_up
 from app.db import create_table
 from contextlib import asynccontextmanager
 from app.api.api import router
@@ -7,6 +8,7 @@ from app.api.api import router
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     create_table()
+    event_up()
     yield
 
 

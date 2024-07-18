@@ -7,7 +7,7 @@ from app.db_config import create_table
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     print("Startup")
-    create_table()
+    # create_table()
     yield
 
 

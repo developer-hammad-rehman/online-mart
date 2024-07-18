@@ -36,7 +36,7 @@ async def order_consumer():
         group_id=KAFKA_GROUP_ID,
         auto_offset_reset="earliest",
         security_protocol="SASL_SSL",
-        sasl_mechanism="PLAIN",
+        sasl_mechanism="PLAIN", 
         sasl_plain_username="$ConnectionString",
         sasl_plain_password=KAFKA_CONNECTION_STRING,
         ssl_context=context,

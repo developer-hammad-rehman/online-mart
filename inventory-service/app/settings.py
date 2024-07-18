@@ -8,5 +8,8 @@ except FileNotFoundError:
 
 
 DATABASE_URL = config("DATABASE_URL", cast=str)
-KAFKA_TOPIC = config("KAFKA_TOPIC", cast=str)
-KAFKA_PORT = config("KAFKA_PORT", cast=str)
+ADMIN_KEY = config("ADMIN_KEY" , cast=str)
+KAFKA_BOOTSTRAP_SERVER = config("KAFKA_BOOTSTRAP_SERVER" , cast=str)
+KAFKA_TOPIC = config("KAFKA_TOPIC" , cast=str)
+KAFKA_CONNECTION_STRING = config("KAFKA_CONNECTION_STRING" , cast=str)
+KAFKA_GROUP_ID = config("KAFKA_GROUP_ID", cast=str)

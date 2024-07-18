@@ -11,8 +11,3 @@ class Payment(SQLModel  , table=True):
 
 class PaymentForm(SQLModel):
     amount: int
-    currency: str
-    card_number: str
-    exp_month: int
-    exp_year: int
-    cvc: str

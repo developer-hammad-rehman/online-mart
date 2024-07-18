@@ -13,6 +13,7 @@ sqlmodel = "^0.0.19"
 python-jose = "^3.3.0"
 aiokafka = "^0.10.0"
 psycopg2 = "^2.9.9"
+protobuf = "^5.27.2"
 
 
 [build-system]

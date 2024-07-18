@@ -1,7 +1,9 @@
 from fastapi import APIRouter
-from app.api.deps import DBSESSION
+from app.api.deps import DBSESSION , PRODUCERDEPS
 from app.core.crud import create_category , create_item , create_hot_item , create_avaliable_stock , create_sell_item
 from app.models import Category, SellItem , HotItem ,AvaliableStock , Item
+from app.settings import KAFKA_TOPIC
+from app import product_pb2
 
 admin_router = APIRouter(tags=["Admin Routes"])
 
@@ -11,9 +13,12 @@ def add_category_route( category:Category,  session:DBSESSION):
     return create_category(category=category, session=session)
 
 
-@admin_router.post('/add-item')
-def add_item_route(item:Item, session:DBSESSION):
-    return create_item(item=item, session=session)
+@admin_router.post('/add-item' , response_model=Item)
+async def add_item_route(item:Item, producer:PRODUCERDEPS):
+    item_proto = product_pb2.Product(name=item.name, description=item.description, price=item.price , category_id=item.category_id)  # type: ignore
+    serialized_string = item_proto.SerializeToString()
+    await producer.send_and_wait(KAFKA_TOPIC , serialized_string)
+    return {"message": "Item added successfully"}
 
 
 @admin_router.post('/add-hot-item')
