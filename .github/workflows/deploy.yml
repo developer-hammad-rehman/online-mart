@@ -22,6 +22,10 @@ jobs:
 
       - name: Build and push Docker image
         run: |
+          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/openapi-merge:latest ./openapi-merge-spec
+          
+          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/openapi-merge:latest
+
           docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/user-service:latest ./user-service
           
           docker push ${{ secrets.DOCKER_HUB_USERNAME }}/user-service:latest
@@ -91,5 +95,15 @@ jobs:
             --environment azure-env \
             --image ${{ secrets.DOCKER_HUB_USERNAME }}/inventory-service:latest \
             --target-port 8082 \
+            --ingress 'external' \
+            --env-vars 'APP_SETTING=my-setting'
+
+          
+          az containerapp create \
+            --name openapi-merge \
+            --resource-group azure-env \
+            --environment azure-env \
+            --image ${{ secrets.DOCKER_HUB_USERNAME }}/openapi-merge:latest \
+            --target-port 8000 \
             --ingress 'external' \
             --env-vars 'APP_SETTING=my-setting'

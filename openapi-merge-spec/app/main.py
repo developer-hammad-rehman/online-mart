@@ -1,5 +1,6 @@
 from fastapi import FastAPI
-import requests
+from app.routes.product_routes import product_router
+from app.routes.order_routes import order_router
 
 app = FastAPI(
     title="User Openapi Merge Spec",
@@ -17,5 +18,6 @@ app = FastAPI(
 async def root():
     return {"message": "User Openapi Merge Spec"}
 
+app.include_router(product_router , tags=["product routes"] , prefix="/api/product-service")
 
-
+app.include_router(order_router, tags=["order routes"], prefix="/api/order-service")
