@@ -10,7 +10,7 @@ def create_acces_token(sub:dict):
 def create_refresh_token(sub:dict):
     to_encode = sub.copy()
     expire_in = datetime.now(timezone.utc) + timedelta(days=30)
-    to_encode.update({"exp": 360000})
+    to_encode.update({"exp": int(expire_in.timestamp())})
     encode_token = jwt.encode(to_encode, key=SECRET_KEY, algorithm=ALGORITHM)
     return encode_token
 
