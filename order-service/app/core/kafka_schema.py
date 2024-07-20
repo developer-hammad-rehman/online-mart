@@ -31,7 +31,7 @@ async def get_producer():
 
 async def order_consumer():
     consumer = AIOKafkaConsumer(
-       KAFKA_TOPIC,
+        KAFKA_TOPIC,
         bootstrap_servers=KAFKA_PORT,  # type: ignore
         group_id=KAFKA_GROUP_ID,
         auto_offset_reset="earliest",

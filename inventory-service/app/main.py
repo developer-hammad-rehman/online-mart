@@ -13,7 +13,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(title="Inventory Service" , lifespan=lifespan)
 
 
-@app.get('/' , tags=["Root Route"])
+@app.get("/" , tags=["Root Route"])
 def root_route():
     return {"message": "Inventory Service"}
 

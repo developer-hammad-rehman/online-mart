@@ -12,6 +12,7 @@ sqlmodel = "^0.0.19"
 stripe = "^10.2.0"
 aiokafka = "^0.11.0"
 psycopg2 = "^2.9.9"
+protobuf = "^5.27.2"
 
 
 [build-system]

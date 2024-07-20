@@ -11,3 +11,4 @@ class Payment(SQLModel  , table=True):
 
 class PaymentForm(SQLModel):
     amount: int
+    payment_id : str

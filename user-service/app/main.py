@@ -14,10 +14,10 @@ app = FastAPI(
 title="User Service",
 lifespan=lifespan,
 servers=[
-    {
-        "url": "https://user-service.bluedune-2d8c02d1.eastus.azurecontainerapps.io",
-        "description": "Production Url",
-    }
+    # {
+    #     "url": "https://user-service.bluedune-2d8c02d1.eastus.azurecontainerapps.io",
+    #     "description": "Production Url",
+    # }
 ]
 )
 
