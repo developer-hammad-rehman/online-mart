@@ -1,5 +1,5 @@
 from typing import Optional
-
+from app.settings import ISSUER_URL , AUD_URL
 from sqlmodel import Session
 from app.api.deps import FORMDEPS, DB_SESSION, PRODUCERDEPS
 from fastapi import APIRouter, Depends, Form
@@ -30,9 +30,9 @@ async def login(form_data: FORMDEPS, session: DB_SESSION, producer: PRODUCERDEPS
         )
         expire_in = datetime.now(timezone.utc) + timedelta(days=1)
         access_token = create_acces_token(
-            sub={"username": user.username, "exp": expire_in}
+            sub={"username": user.username, "exp": expire_in, "iss": ISSUER_URL , "aud": AUD_URL}
         )
-        refresh_token = create_refresh_token(sub={"username": user.username})
+        refresh_token = create_refresh_token(sub={"username": user.username, "iss": ISSUER_URL , "aud": AUD_URL})
         return Token(
             access_token=access_token,
             refresh_token=refresh_token,
@@ -51,9 +51,9 @@ def oauth_token_route(
             username = payload.get("username")
             expire_in = datetime.now(timezone.utc) + timedelta(days=1)
             accces_token = create_acces_token(
-                sub={"username": username, "exp": expire_in  , "iss": "https://kong-online-mart.azure-api.net/user-service" , "aud": "https://kong-online-mart.azure-api.net"}
+                sub={"username": username, "exp": expire_in  , "iss": ISSUER_URL , "aud": AUD_URL}
             )
-            new_refresh_token = create_refresh_token(sub={"username": username})
+            new_refresh_token = create_refresh_token(sub={"username": username ,"iss": ISSUER_URL , "aud": AUD_URL})
             return GPToken(
                 access_token=accces_token,
                 expires_in=int(expire_in.timestamp()),
@@ -64,9 +64,9 @@ def oauth_token_route(
             username = payload.get("username")
             expire_in = datetime.now(timezone.utc) + timedelta(days=1)
             accces_token = create_acces_token(
-                sub={"username": username, "exp": expire_in , "iss": "https://kong-online-mart.azure-api.net/user-service" , "aud": "https://kong-online-mart.azure-api.net"}
+                sub={"username": username, "exp": expire_in , "iss": ISSUER_URL , "aud": AUD_URL}
             )
-            new_refresh_token = create_refresh_token(sub={"username": username})
+            new_refresh_token = create_refresh_token(sub={"username": username ,"iss": ISSUER_URL , "aud": AUD_URL})
             return GPToken(
                 access_token=accces_token,
                 expires_in=int(expire_in.timestamp()),
