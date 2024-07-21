@@ -1,17 +1,15 @@
 from typing import Optional
-from app.settings import ISSUER_URL , AUD_URL
-from sqlmodel import Session
 from app.api.deps import FORMDEPS, DB_SESSION, PRODUCERDEPS
-from fastapi import APIRouter, Depends, Form
+from fastapi import APIRouter, Form
 from app.core.auth import get_user
 from fastapi import HTTPException
 from datetime import datetime, timedelta, timezone
 from app.core.token import create_acces_token, create_refresh_token, decode_token
 from app.models import GPToken, Token
 from app.settings import KAFKA_NOTIFICATION_TOPIC
-from app.db import get_session
 import json
 from jose import JWTError
+from app.settings import ISSUER_URL , AUD_URL
 
 login_router = APIRouter(tags=["Auth Routes"])
 
@@ -30,9 +28,9 @@ async def login(form_data: FORMDEPS, session: DB_SESSION, producer: PRODUCERDEPS
         )
         expire_in = datetime.now(timezone.utc) + timedelta(days=1)
         access_token = create_acces_token(
-            sub={"username": user.username, "exp": expire_in, "iss": ISSUER_URL , "aud": AUD_URL}
+            sub={"username": user.username, "exp": expire_in}
         )
-        refresh_token = create_refresh_token(sub={"username": user.username, "iss": ISSUER_URL , "aud": AUD_URL})
+        refresh_token = create_refresh_token(sub={"username": user.username})
         return Token(
             access_token=access_token,
             refresh_token=refresh_token,
@@ -40,7 +38,7 @@ async def login(form_data: FORMDEPS, session: DB_SESSION, producer: PRODUCERDEPS
 
 
 @login_router.post("/oauth-token")
-def oauth_token_route(
+async def oauth_token_route(
     grant_type: str = Form(...),
     refresh_token: Optional[str] = Form(None),
     code: Optional[str] = Form(None),
@@ -53,7 +51,7 @@ def oauth_token_route(
             accces_token = create_acces_token(
                 sub={"username": username, "exp": expire_in  , "iss": ISSUER_URL , "aud": AUD_URL}
             )
-            new_refresh_token = create_refresh_token(sub={"username": username ,"iss": ISSUER_URL , "aud": AUD_URL})
+            new_refresh_token = create_refresh_token(sub={"username": username})
             return GPToken(
                 access_token=accces_token,
                 expires_in=int(expire_in.timestamp()),
@@ -66,7 +64,7 @@ def oauth_token_route(
             accces_token = create_acces_token(
                 sub={"username": username, "exp": expire_in , "iss": ISSUER_URL , "aud": AUD_URL}
             )
-            new_refresh_token = create_refresh_token(sub={"username": username ,"iss": ISSUER_URL , "aud": AUD_URL})
+            new_refresh_token = create_refresh_token(sub={"username": username})
             return GPToken(
                 access_token=accces_token,
                 expires_in=int(expire_in.timestamp()),
