@@ -51,7 +51,7 @@ def oauth_token_route(
             username = payload.get("username")
             expire_in = datetime.now(timezone.utc) + timedelta(days=1)
             accces_token = create_acces_token(
-                sub={"username": username, "exp": expire_in}
+                sub={"username": username, "exp": expire_in  , "iss": "https://kong-online-mart.azure-api.net/user-service" , "aud": "https://kong-online-mart.azure-api.net"}
             )
             new_refresh_token = create_refresh_token(sub={"username": username})
             return GPToken(
@@ -64,7 +64,7 @@ def oauth_token_route(
             username = payload.get("username")
             expire_in = datetime.now(timezone.utc) + timedelta(days=1)
             accces_token = create_acces_token(
-                sub={"username": username, "exp": expire_in}
+                sub={"username": username, "exp": expire_in , "iss": "https://kong-online-mart.azure-api.net/user-service" , "aud": "https://kong-online-mart.azure-api.net"}
             )
             new_refresh_token = create_refresh_token(sub={"username": username})
             return GPToken(
