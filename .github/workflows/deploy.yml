@@ -22,10 +22,6 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/openapi-merge:latest ./openapi-merge-spec
-          
-          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/openapi-merge:latest
-
           docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/user-service:latest ./user-service
           
           docker push ${{ secrets.DOCKER_HUB_USERNAME }}/user-service:latest
@@ -45,6 +41,10 @@ jobs:
           docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/inventory-service:latest ./inventory-service
           
           docker push ${{ secrets.DOCKER_HUB_USERNAME }}/inventory-service:latest
+
+          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/payment-service:latest ./payment-service
+          
+          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/payment-service:latest
 
       - name: Azure Login
         uses: azure/login@v1
@@ -98,12 +98,11 @@ jobs:
             --ingress 'external' \
             --env-vars 'APP_SETTING=my-setting'
 
-          
           az containerapp create \
-            --name openapi-merge \
+            --name payment-service \
             --resource-group azure-env \
             --environment azure-env \
             --image ${{ secrets.DOCKER_HUB_USERNAME }}/openapi-merge:latest \
-            --target-port 8000 \
+            --target-port 8085 \
             --ingress 'external' \
             --env-vars 'APP_SETTING=my-setting'

@@ -2,7 +2,7 @@ import asyncio
 import logging
 import ssl
 from aiokafka import AIOKafkaConsumer, AIOKafkaProducer
-# from app.core.crud import add_in_db
+from app.core.kafka_controllers import add_payment_intent
 from app.settings import KAFKA_BOOTSTRAP_SERVER ,   KAFKA_CONNECTION_STRING , KAFKA_TOPIC , KAFKA_GROUP_ID
 from app import payment_pb2
 
@@ -46,13 +46,12 @@ async def payment_consumer():
         async for msg in consumer:
             msg_decode = payment_pb2.Payment() # type: ignore
             msg_decode.ParseFromString(msg.value)
-            # add_in_db(msg_decode)
+            add_payment_intent(msg_decode)
             logging.info(f"Message Consumed {msg_decode}")
     except Exception as e:
         logging.error(f"Kafka Error: {str(e)}")
     finally:
         await consumer.stop()
-
 
 def event_up():
     asyncio.create_task(payment_consumer())
