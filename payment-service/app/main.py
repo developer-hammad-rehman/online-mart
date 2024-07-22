@@ -14,11 +14,11 @@ async def lifespan(app: FastAPI):
 
 
 
-app = FastAPI(title="Payment Service",lifespan=lifespan)
+app = FastAPI(title="Payment Service", lifespan=lifespan)
 
 
 @app.get('/')
-def read_root():
+def read_root_route():
     return {"message": "Payemmt Service"}
 
 
