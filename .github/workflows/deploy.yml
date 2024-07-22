@@ -102,7 +102,7 @@ jobs:
             --name payment-service \
             --resource-group azure-env \
             --environment azure-env \
-            --image ${{ secrets.DOCKER_HUB_USERNAME }}/openapi-merge:latest \
+            --image ${{ secrets.DOCKER_HUB_USERNAME }}/payment-service:latest \
             --target-port 8085 \
             --ingress 'external' \
             --env-vars 'APP_SETTING=my-setting'
