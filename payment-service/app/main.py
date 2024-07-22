@@ -17,9 +17,9 @@ async def lifespan(app: FastAPI):
 app = FastAPI(title="Payment Service",lifespan=lifespan)
 
 
-@app.get('/payment-service')
+@app.get('/')
 def read_root():
     return {"message": "Payemmt Service"}
 
 
-app.include_router(payment_routes.router , prefix="/payment-service")
+app.include_router(payment_routes.router)

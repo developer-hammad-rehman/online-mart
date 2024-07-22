@@ -24,9 +24,9 @@ app = FastAPI(
 )
 
 
-@app.get("/product-service")
+@app.get("/")
 def root_route():
     return {"message": "Product Service"}
 
 
-app.include_router(router , prefix="/product-service")
+app.include_router(router)
