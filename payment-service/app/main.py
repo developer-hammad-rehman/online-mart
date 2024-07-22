@@ -8,7 +8,7 @@ from app.routes import payment_routes
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     create_table()
-    event_up()
+    # event_up()
     yield
 
 
@@ -17,9 +17,9 @@ async def lifespan(app: FastAPI):
 app = FastAPI(title="Payment Service",lifespan=lifespan)
 
 
-@app.get('/')
+@app.get('/payment-service')
 def read_root():
     return {"message": "Payemmt Service"}
 
 
-app.include_router(payment_routes.router)
+app.include_router(payment_routes.router , prefix="/payment-service")

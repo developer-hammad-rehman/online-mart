@@ -24,7 +24,7 @@ app = FastAPI(
 )
 
 
-@app.get("/" , tags=["Root Route"])
+@app.get("/order-service" , tags=["Root Route"])
 async def root_route():
     return {"message": "Order Service"}
-app.include_router(router)
+app.include_router(router , prefix="/order-service")

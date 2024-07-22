@@ -4,8 +4,7 @@ import stripe
 from app.depends import DBSESSION, PRODUCER
 from app.models import Payment, PaymentForm
 from fastapi.responses import RedirectResponse
-from app import payment_pb2
-from app.settings import KAFKA_TOPIC, STRIPE_KEY
+from app.settings import  STRIPE_KEY
 
 
 stripe.api_key = STRIPE_KEY
@@ -24,16 +23,12 @@ async def checkout_payment(price: int, quantity: int):
 #=============================================================================================
 
 @router.post("/create-payment-intent")
-async def create_payment_intent(request: PaymentForm, producer: PRODUCER):
+async def create_payment_intent(request: PaymentForm):
     try:
         intent = stripe.PaymentIntent.create(
             amount=int(request.amount),
             currency="usd",
-            payment_method=request.payment_id,
         )
-        proto_buf = payment_pb2.Payment(payment_intent_id=intent.id , payment_id=request.payment_id)  # type: ignore
-        serialized_string = proto_buf.SerializeToString()
-        await producer.send_and_wait(KAFKA_TOPIC, serialized_string)
         return {"clientSecret": intent.client_secret}
     except Exception as e:
         return {"error": str(e)}
