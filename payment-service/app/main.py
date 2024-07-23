@@ -8,7 +8,7 @@ from app.routes import payment_routes
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     create_table()
-    # event_up()
+    event_up()
     yield
 
 

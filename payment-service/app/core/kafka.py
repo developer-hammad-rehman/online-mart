@@ -2,7 +2,7 @@ import asyncio
 import logging
 import ssl
 from aiokafka import AIOKafkaConsumer, AIOKafkaProducer
-from app.core.kafka_controllers import add_payment_intent
+from app.core.kafka_controllers import add_payment
 from app.settings import KAFKA_BOOTSTRAP_SERVER ,   KAFKA_CONNECTION_STRING , KAFKA_TOPIC , KAFKA_GROUP_ID
 from app import payment_pb2
 
@@ -13,6 +13,9 @@ context.check_hostname = False
 context.verify_mode = ssl.CERT_REQUIRED
 
 async def get_kafka_producer():
+    """
+    Kafka Producer Function For Producer Messages In Kafka Node
+    """
     producer = AIOKafkaProducer(
         bootstrap_servers=KAFKA_BOOTSTRAP_SERVER,
         security_protocol="SASL_SSL",
@@ -46,7 +49,7 @@ async def payment_consumer():
         async for msg in consumer:
             msg_decode = payment_pb2.Payment() # type: ignore
             msg_decode.ParseFromString(msg.value)
-            add_payment_intent(msg_decode)
+            add_payment(msg_decode)
             logging.info(f"Message Consumed {msg_decode}")
     except Exception as e:
         logging.error(f"Kafka Error: {str(e)}")

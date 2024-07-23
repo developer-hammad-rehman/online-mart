@@ -1,7 +1,8 @@
 syntax = "proto3";
 
-
-message Payment{
-   int32 payment_intent_id = 3;
-   string payment_id = 4;
+message Payment {   
+    double amount = 2;  
+    string currency = 3;
+    string status = 4;
+    string type = 5;    
 }
