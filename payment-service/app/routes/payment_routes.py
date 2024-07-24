@@ -71,7 +71,7 @@ async def stripe_webhook_route(request: Request, producer: PRODUCER):
     if event["type"] == "checkout.session.completed":
         session = event["data"]["object"]
         print(session)
-        proto_buf = payment_pb2.Payment(amount=session["amount_total"], currency="usd", status="succeded", type="card")  # type: ignore
+        proto_buf = payment_pb2.Payment(amount=session["amount_total"]/100, currency="usd", status="succeded", type="card")  # type: ignore
         encode_string = proto_buf.SerializeToString()
         await producer.send_and_wait(KAFKA_TOPIC, encode_string)
     return {"status": "success"}

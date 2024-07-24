@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rpayment.proto\"8\n\x07Payment\x12\x19\n\x11payment_intent_id\x18\x03 \x01(\x05\x12\x12\n\npayment_id\x18\x04 \x01(\tb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rpayment.proto\"I\n\x07Payment\x12\x0e\n\x06\x61mount\x18\x02 \x01(\x01\x12\x10\n\x08\x63urrency\x18\x03 \x01(\t\x12\x0e\n\x06status\x18\x04 \x01(\t\x12\x0c\n\x04type\x18\x05 \x01(\tb\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'payment_pb2', globals())
@@ -21,5 +21,5 @@ if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   _PAYMENT._serialized_start=17
-  _PAYMENT._serialized_end=73
+  _PAYMENT._serialized_end=90
 # @@protoc_insertion_point(module_scope)
