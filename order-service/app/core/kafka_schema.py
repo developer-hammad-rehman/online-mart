@@ -50,7 +50,7 @@ async def order_consumer():
     except Exception as e:
         logging.error(f"Kafka Error: {str(e)}")
     finally:
-        await consumer.stop()
+        await consumer.stop() # type: ignore
 
 
 async def start_consumer_with_retries():

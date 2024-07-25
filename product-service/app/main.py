@@ -15,12 +15,12 @@ async def lifespan(app: FastAPI):
 app = FastAPI(
     title="Product Service",
     lifespan=lifespan,
-    servers=[
-        {
-            "url": "https://product-service.bluedune-2d8c02d1.eastus.azurecontainerapps.io",
-            "description": "Production Url",
-        }
-    ],
+    # servers=[
+    #     {
+    #         "url": "https://product-service.bluedune-2d8c02d1.eastus.azurecontainerapps.io",
+    #         "description": "Production Url",
+    #     }
+    # ],
 )
 
 

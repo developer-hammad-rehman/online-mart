@@ -13,9 +13,9 @@ def add_category_route( category:Category,  session:DBSESSION):
     return create_category(category=category, session=session)
 
 
-@admin_router.post('/add-item' , response_model=Item)
+@admin_router.post('/add-item')
 async def add_item_route(item:Item, producer:PRODUCERDEPS):
-    item_proto = product_pb2.Product(name=item.name, description=item.description, price=item.price , category_id=item.category_id)  # type: ignore
+    item_proto = product_pb2.Product(id=item.id,name=item.name, description=item.description, price=item.price , category_id=item.category_id)  # type: ignore
     serialized_string = item_proto.SerializeToString()
     await producer.send_and_wait(KAFKA_TOPIC , serialized_string)
     return {"message": "Item added successfully"}

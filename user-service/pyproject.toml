@@ -15,6 +15,8 @@ psycopg2 = "^2.9.9"
 passlib = {extras = ["bycrpt"], version = "^1.7.4"}
 python-jose = "^3.3.0"
 bcrypt = "^4.1.3"
+pytest = "^8.3.1"
+httpx = "^0.27.0"
 
 
 [build-system]

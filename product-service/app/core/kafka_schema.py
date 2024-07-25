@@ -47,7 +47,7 @@ async def items_consumer():
             msg_decode = product_pb2.Product() # type: ignore
             msg_decode.ParseFromString(msg.value)
             add_in_db(msg_decode)
-            logging.info(f"Message Consumed : {msg_decode.type}")
+            logging.info(f"Message Consumed : {msg_decode}")
     except Exception as e:
         logging.error(f"Kafka Error: {str(e)}")
     finally:

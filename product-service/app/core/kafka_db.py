@@ -1,11 +1,10 @@
-from fastapi import Depends
 from app.core.crud import create_item
-from app.db import Session ,engine
+from app.db import  get_session
 from app.models import Item
 
 
 def add_in_db(item):
- with Session(engine) as session:
+ with next(get_session()) as session:
     item = Item(
         name=item.name,
         price=item.price,
