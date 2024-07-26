@@ -1,0 +1,1004 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "Online Mart Assistant",
+        "version": "0.1.0"
+    },
+    "servers": [
+        {
+            "url": "https://martnest.vercel.app/api",
+            "description": "Production Url"
+        }
+    ],
+    "paths": {
+        "/product-service": {
+            "get": {
+                "summary": "Root Route",
+                "operationId": "root_route_product_service_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/product-service/get-category": {
+            "get": {
+                "tags": [
+                    "User Routes"
+                ],
+                "summary": "Get Category Route",
+                "operationId": "get_category_route_product_service_get_category_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/product-service/get-items": {
+            "get": {
+                "tags": [
+                    "User Routes"
+                ],
+                "summary": "Get Item Route",
+                "operationId": "get_item_route_product_service_get_items_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/product-service/get-avaliable-items": {
+            "get": {
+                "tags": [
+                    "User Routes"
+                ],
+                "summary": "Get Avaliable Stock Route",
+                "operationId": "get_avaliable_stock_route_product_service_get_avaliable_items_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/product-service/get-hot-items": {
+            "get": {
+                "tags": [
+                    "User Routes"
+                ],
+                "summary": "Get Hot Item Route",
+                "operationId": "get_hot_item_route_product_service_get_hot_items_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/product-service/get-sell-items": {
+            "get": {
+                "tags": [
+                    "User Routes"
+                ],
+                "summary": "Get Sell Item Route",
+                "operationId": "get_sell_item_route_product_service_get_sell_items_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/product-service/add-category": {
+            "post": {
+                "tags": [
+                    "Admin Routes"
+                ],
+                "summary": "Add Category Route",
+                "operationId": "add_category_route_product_service_add_category_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Category"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/product-service/add-item": {
+            "post": {
+                "tags": [
+                    "Admin Routes"
+                ],
+                "summary": "Add Item Route",
+                "operationId": "add_item_route_product_service_add_item_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Item"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Item"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/product-service/add-hot-item": {
+            "post": {
+                "tags": [
+                    "Admin Routes"
+                ],
+                "summary": "Add Hot Item Route",
+                "operationId": "add_hot_item_route_product_service_add_hot_item_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/HotItem"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/product-service/add-avaliable-stock": {
+            "post": {
+                "tags": [
+                    "Admin Routes"
+                ],
+                "summary": "Add Avaliable Stock Route",
+                "operationId": "add_avaliable_stock_route_product_service_add_avaliable_stock_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AvaliableStock"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/product-service/add-sell-item": {
+            "post": {
+                "tags": [
+                    "Admin Routes"
+                ],
+                "summary": "Add Sell Item Route",
+                "operationId": "add_sell_item_route_product_service_add_sell_item_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SellItem"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/order-service": {
+            "get": {
+                "tags": [
+                    "Root Route"
+                ],
+                "summary": "Root Route",
+                "operationId": "root_route_order_service_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/order-service/admin/admin": {
+            "get": {
+                "tags": [
+                    "Admin Routes"
+                ],
+                "summary": "Get Orders Router",
+                "operationId": "get_orders_router_order_service_admin_admin_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/Order"
+                                    },
+                                    "type": "array",
+                                    "title": "Response Get Orders Router Order Service Admin Admin Get"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/order-service/admin/approve-order": {
+            "post": {
+                "tags": [
+                    "Admin Routes"
+                ],
+                "summary": "Approve Order Router",
+                "operationId": "approve_order_router_order_service_admin_approve_order_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ApproveOrder"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApproveOrder"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/order-service/admin/get-approve-orders": {
+            "get": {
+                "tags": [
+                    "Admin Routes"
+                ],
+                "summary": "Get Approve Orders Router",
+                "operationId": "get_approve_orders_router_order_service_admin_get_approve_orders_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/order-service/admin/publish-order-status": {
+            "post": {
+                "tags": [
+                    "Admin Routes"
+                ],
+                "summary": "Publish Order Status",
+                "operationId": "publish_order_status_order_service_admin_publish_order_status_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/OrderModelStatus"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/order-service/place-order": {
+            "post": {
+                "tags": [
+                    "User Routes"
+                ],
+                "summary": "Get User Route",
+                "operationId": "get_user_route_order_service_place_order_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Order"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/order-service/get-orders": {
+            "get": {
+                "tags": [
+                    "User Routes"
+                ],
+                "summary": "Get Order",
+                "operationId": "get_order_order_service_get_orders_get",
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Username"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/order-service/delete-order": {
+            "delete": {
+                "tags": [
+                    "User Routes"
+                ],
+                "summary": "Delete Order Route",
+                "operationId": "delete_order_route_order_service_delete_order_delete",
+                "parameters": [
+                    {
+                        "name": "order_id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Order Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/order-service/complete-order": {
+            "post": {
+                "tags": [
+                    "User Routes"
+                ],
+                "summary": "Complete Order Route",
+                "operationId": "complete_order_route_order_service_complete_order_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/OrderModelStatus"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/payment-service": {
+            "get": {
+                "summary": "Read Root Route",
+                "operationId": "read_root_route_payment_service_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/payment-service/checkout": {
+            "get": {
+                "summary": "Create Checkout Session",
+                "operationId": "create_checkout_session_payment_service_checkout_get",
+                "parameters": [
+                    {
+                        "name": "amount",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Amount"
+                        }
+                    },
+                    {
+                        "name": "quantity",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Quantity"
+                        }
+                    },
+                    {
+                        "name": "product_name",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Product Name"
+                        }
+                    },
+                    {
+                        "name": "is_online_mart_assistant",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean",
+                            "default": false,
+                            "title": "Is Online Mart Assistant"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/payment-service/webhook": {
+            "post": {
+                "summary": "Stripe Webhook Route",
+                "operationId": "stripe_webhook_route_payment_service_webhook_post",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "AvaliableStock": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "title": "Id"
+                    },
+                    "quantity": {
+                        "type": "integer",
+                        "title": "Quantity"
+                    },
+                    "item_id": {
+                        "type": "integer",
+                        "title": "Item Id"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "quantity",
+                    "item_id"
+                ],
+                "title": "AvaliableStock"
+            },
+            "Category": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "title": "Id"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    },
+                    "description": {
+                        "type": "string",
+                        "title": "Description"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name",
+                    "description"
+                ],
+                "title": "Category"
+            },
+            "HTTPValidationError": {
+                "properties": {
+                    "detail": {
+                        "items": {
+                            "$ref": "#/components/schemas/ValidationError"
+                        },
+                        "type": "array",
+                        "title": "Detail"
+                    }
+                },
+                "type": "object",
+                "title": "HTTPValidationError"
+            },
+            "HotItem": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "title": "Id"
+                    },
+                    "item_id": {
+                        "type": "integer",
+                        "title": "Item Id"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "item_id"
+                ],
+                "title": "HotItem"
+            },
+            "Item": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "title": "Id"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    },
+                    "description": {
+                        "type": "string",
+                        "title": "Description"
+                    },
+                    "price": {
+                        "type": "number",
+                        "title": "Price"
+                    },
+                    "category_id": {
+                        "type": "integer",
+                        "title": "Category Id"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name",
+                    "description",
+                    "price",
+                    "category_id"
+                ],
+                "title": "Item"
+            },
+            "SellItem": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "title": "Id"
+                    },
+                    "percent": {
+                        "type": "integer",
+                        "title": "Percent"
+                    },
+                    "item_id": {
+                        "type": "integer",
+                        "title": "Item Id"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "percent",
+                    "item_id"
+                ],
+                "title": "SellItem"
+            },
+            "ValidationError": {
+                "properties": {
+                    "loc": {
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "integer"
+                                }
+                            ]
+                        },
+                        "type": "array",
+                        "title": "Location"
+                    },
+                    "msg": {
+                        "type": "string",
+                        "title": "Message"
+                    },
+                    "type": {
+                        "type": "string",
+                        "title": "Error Type"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "loc",
+                    "msg",
+                    "type"
+                ],
+                "title": "ValidationError"
+            },
+            "ApproveOrder": {
+                "properties": {
+                    "id": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Id"
+                    },
+                    "des": {
+                        "type": "string",
+                        "title": "Des"
+                    },
+                    "order_id": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Order Id"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "des"
+                ],
+                "title": "ApproveOrder"
+            },
+            "Order": {
+                "properties": {
+                    "id": {
+                        "anyOf": [
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Id"
+                    },
+                    "product_name": {
+                        "type": "string",
+                        "title": "Product Name"
+                    },
+                    "price": {
+                        "type": "string",
+                        "title": "Price"
+                    },
+                    "username": {
+                        "type": "string",
+                        "title": "Username"
+                    },
+                    "quantity": {
+                        "type": "integer",
+                        "title": "Quantity"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "title": "Created At",
+                        "default": "2024-07-24T14:54:11.560725"
+                    },
+                    "delivery_charges": {
+                        "type": "integer",
+                        "title": "Delivery Charges",
+                        "default": 70
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "product_name",
+                    "price",
+                    "username",
+                    "quantity"
+                ],
+                "title": "Order"
+            },
+            "OrderModelStatus": {
+                "properties": {
+                    "order_id": {
+                        "type": "integer",
+                        "title": "Order Id"
+                    },
+                    "username": {
+                        "type": "string",
+                        "title": "Username"
+                    },
+                    "product_name": {
+                        "type": "string",
+                        "title": "Product Name"
+                    },
+                    "quantity": {
+                        "type": "integer",
+                        "title": "Quantity"
+                    },
+                    "status": {
+                        "type": "string",
+                        "title": "Status",
+                        "default": "pending"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "order_id",
+                    "username",
+                    "product_name",
+                    "quantity"
+                ],
+                "title": "OrderModelStatus"
+            }
+        }
+    }
+}
