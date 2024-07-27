@@ -49,28 +49,29 @@ def delete_pending_order(order_id: int, session: Session):
     session.commit()
 
 
-def kafka_order_status(order_status: dict):
+def kafka_order_status(order_status):
     with next(get_session()) as session:
-        if order_status["status"] == "complete":
+        if order_status.status == "complete":
             place_order_stautus(
-                status="arrived", order_id=order_status["order_id"], session=session
+                status="arrived", order_id=order_status.order_id, session=session
             )
             completed_order(
-                order_status["order_id"],
-                order_status["username"],
-                order_status["product_name"],
-                order_status["quantity"],
-                session=session,
+                order_status.order_id,
+                order_status.username,
+                order_status.product_name,
+                order_status.quantity,
+                session,
             )
-            delete_pending_order(order_status["order_id"], session=session)
+            delete_pending_order(order_status.order_id, session)
+        
         else:
             place_order_stautus(
-                status="pending", order_id=order_status["order_id"], session=session
+                status="pending", order_id=order_status.order_id, session=session
             )
             pending_order(
-                order_status["order_id"],
-                order_status["username"],
-                order_status["product_name"],
-                order_status["quantity"],
+                order_status.order_id,
+                order_status.username,
+                order_status.product_name,
+                order_status.quantity,
                 session=session,
             )

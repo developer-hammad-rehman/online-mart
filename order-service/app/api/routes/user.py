@@ -4,6 +4,7 @@ from app.settings import KAFKA_TOPIC, KAFKA_NOTIFICATION_TOPIC
 from app.core.crud import get_order_userorder, delete_order, place_order
 from app.models import Order, OrderModelStatus
 import json
+from app import order_pb2
 
 user_router = APIRouter(tags=["User Routes"])
 
@@ -31,8 +32,11 @@ def delete_order_route(order_id: int, session: DBSESSION):
 
 @user_router.post("/complete-order")
 async def complete_order_route(order_status: OrderModelStatus, producer: PRODUCERDEP):
+    protobuf = order_pb2.Order(order_id = order_status.order_id ,username=order_status.username ,product_name=order_status.product_name,quantity=order_status.quantity ,status=order_status.status) # type: ignore
+    encoded_string = protobuf.SerializeToString()
     await producer.send_and_wait(
-        KAFKA_TOPIC, json.dumps(order_status.model_dump()).encode("utf-8")
+        KAFKA_TOPIC, 
+        encoded_string
     )
     await producer.send_and_wait(
         KAFKA_NOTIFICATION_TOPIC,

@@ -2,9 +2,9 @@ import asyncio
 import logging
 from app.core.kafka_order import kafka_order_status
 from aiokafka import AIOKafkaProducer, AIOKafkaConsumer
-import json
 import ssl
 from app.settings import KAFKA_GROUP_ID, KAFKA_PORT, KAFKA_TOPIC , KAFKA_CONNECTION_STRING
+from app import order_pb2
 
 logging.basicConfig(level=logging.INFO)
 
@@ -44,27 +44,15 @@ async def order_consumer():
     await consumer.start()
     try:
         async for msg in consumer:
-            decode_json = json.loads(bytes(msg.value).decode("utf-8"))  # type: ignore
-            logging.info(f"Consumed message: {decode_json}")
-            kafka_order_status(decode_json)
+            msg_decode  = order_pb2.Order() # type: ignore
+            msg_decode.ParseFromString(msg.value)
+            logging.info(f"Consumed message: {msg_decode}")
+            kafka_order_status(msg_decode)
     except Exception as e:
         logging.error(f"Kafka Error: {str(e)}")
     finally:
         await consumer.stop() # type: ignore
 
 
-async def start_consumer_with_retries():
-    retries = 5
-    for attempt in range(retries):
-        try:
-            await order_consumer()  # type: ignore
-            break
-        except Exception as e:
-            logging.error(
-                f"Failed to start consumer, attempt {attempt + 1}/{retries}: {e}"
-            )
-            await asyncio.sleep(5)
-
-
 async def event_up():
-    asyncio.create_task(start_consumer_with_retries())
+    asyncio.create_task(order_consumer())

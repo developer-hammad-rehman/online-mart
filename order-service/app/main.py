@@ -15,16 +15,17 @@ async def lifespan(app: FastAPI):
 app = FastAPI(
     title="Order Service", 
     lifespan=lifespan, 
-     servers=[
-        {
-            "url": "https://order-service.bluedune-2d8c02d1.eastus.azurecontainerapps.io",
-            "description": "Production Url",
-        }
-    ],
+    #  servers=[
+    #     {
+    #         "url": "https://order-service.bluedune-2d8c02d1.eastus.azurecontainerapps.io",
+    #         "description": "Production Url",
+    #     }
+    # ],
 )
 
 
 @app.get("/" , tags=["Root Route"])
 async def root_route():
     return {"message": "Order Service"}
+
 app.include_router(router)

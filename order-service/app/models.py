@@ -26,7 +26,6 @@ class OrderStatus(SQLModel, table=True):
     order_id : Optional[int] = Field(default=None, foreign_key="order.id")
 
 
-
 class PendingOrder(SQLModel, table=True):
     id : Optional[int] = Field(default=None, primary_key=True)
     username:str

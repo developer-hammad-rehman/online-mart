@@ -42,13 +42,16 @@ def test_get_orders_route():
     assert isinstance(response.json(), list)
 
 
-def test_delete_order_route():
-    response = client.delete("/delete-order?order_id=1")
-    assert response.status_code == 200
-    assert response.json() == {"message":"Order Deleted"}
 
 
 def test_complete_order_route():
     response = client.post("/complete-order", json={"order_id": 1 , "username":"hammadrehman208@gmail.com" , "product_name":"Shirt" , "quantity":1 , "status":"complete"})
     assert response.status_code == 200
     assert response.json() == {"message": "Order completed"}
+
+
+
+def test_delete_order_route():
+    response = client.delete("/delete-order?order_id=1")
+    assert response.status_code == 200
+    assert response.json() == {"message":"Order Deleted"}
