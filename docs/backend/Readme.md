@@ -53,5 +53,5 @@ The application is divided into the following microservices:
 
 1. **Clone the repository**:
    ```sh
-   git clone https://github.com/yourusername/online-mart-app.git
+   git clone https://github.com/developer-hammad-rehman/online-mart-app.git
    cd online-mart-app
