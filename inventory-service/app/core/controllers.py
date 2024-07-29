@@ -1,8 +1,7 @@
 from app.core.crud import add_product
 from app.models import Product
 from app.settings import ADMIN_KEY
-from sqlmodel import Session
-from app.db import engine
+from app.db import get_session
 
 
 def verify_admin_key(key: str):
@@ -10,7 +9,7 @@ def verify_admin_key(key: str):
 
 
 def add_in_db(data):
-    with Session(engine) as session:
+    with next(get_session()) as session:
         product = Product(
             name=data.name,
             price=data.price,
